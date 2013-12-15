@@ -1,12 +1,26 @@
 'use strict';
 
 angular.module('testTakerApp')
-  .directive('group', function () {
+  .directive('group', function ($compile) {
     return {
-      template: '<div></div>',
+      scope: true,
       restrict: 'E',
-      link: function postLink(scope, element, attrs) {
-        element.text('this is the group directive');
-      }
+        link:function(scope, element, attributes){
+            var elem;
+
+            attributes.$observe('template', function(tpl){
+                if(angular.isDefined(tpl)){
+                    elem = $compile(tpl)(scope);
+                    element.html('');
+                    element.append(elem);
+                }
+            });
+            attributes.$observe('max', function(sze){
+                if(angular.isDefined(sze)){
+                    scope.max = int.parse(sze);
+                    console.log('max is ' + scope.max);
+                }
+            });
+        }
     };
   });
