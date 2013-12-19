@@ -5,7 +5,11 @@ angular.module('testTakerApp')
     /*$http.get('/api/awesomeThings').success(function(awesomeThings) {
       $scope.awesomeThings = awesomeThings;
     });
-*/
+    */
+    $http.get('/api/portalUsers').success(function(users) {
+      $scope.users = users;
+    });
+
     $scope.loadMore = function(){
         $scope.groups = Groupservice.getGroups();//.splice(0, scope.maxSize);
         $scope.template = Templateservice.getGroupTemplate();
